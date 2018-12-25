@@ -9,6 +9,18 @@ class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('empid', 'empname', 'deptname', 'email', 'ext')
 
 
+class EmployeeCreate(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Employee
+        fields = ('empid', 'empname', 'deptname', 'email', 'ext')
+
+
+class EmployeeUpdate(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Employee
+        fields = ('empid', 'empname', 'deptname', 'email', 'ext')
+
+
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group

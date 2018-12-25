@@ -21,10 +21,13 @@ from project import views
 
 router = routers.DefaultRouter()
 router.register(r'employees', views.EmployeeViewSet)
+# router.register(r'employee', views.CreateEmployee.as_view())
 router.register(r'groups', views.GroupViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^api-auth/', include('rest_framework.urls'))
+    url(r'^api-auth/', include('rest_framework.urls')),
+    url(r'^add-employee/', views.CreateEmployee.as_view())
+    # url(r'^update-employee/', views.CreateEmployee.as_view())
 
 ] + router.urls
