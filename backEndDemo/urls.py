@@ -15,19 +15,24 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.urls import include
+from django.urls import include, path
 from rest_framework import routers
-from project import views
+from project import viewset
+from rest_framework.authtoken import views
+from project.models import Employee
 
 router = routers.DefaultRouter()
-router.register(r'employees', views.EmployeeViewSet)
-# router.register(r'employee', views.CreateEmployee.as_view())
-router.register(r'groups', views.GroupViewSet)
+router.register(r'employees', viewset.EmployeeViewSet)
+# router.register('employee', views.CreateEmployee, base_name=Employee)
+router.register(r'groups', viewset.GroupViewSet)
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api-auth/', include('rest_framework.urls')),
-    url(r'^add-employee/', views.CreateEmployee.as_view())
-    # url(r'^update-employee/', views.CreateEmployee.as_view())
+    url(r'^add-employee/', viewset.CreateEmployee.as_view()),
+    path('employee/<int:pk>/update/', viewset.UpdateEmployee.as_view()),
+    path('employee/<int:pk>/delete/', viewset.DeleteEmployee.as_view()),
+    path('api-auth-token/', views.obtain_auth_token, name='api-auth-token')
+    # url(r'^update-employee/(?P<pk>[^/.]+)/$', views.UpdateEmployee.as_view())
 
 ] + router.urls

@@ -6,7 +6,7 @@ from .models import Employee
 class EmployeeSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Employee
-        fields = ('empid', 'empname', 'deptname', 'email', 'ext')
+        fields = ('pk', 'empid', 'empname', 'deptname', 'email', 'ext')
 
 
 class EmployeeCreate(serializers.HyperlinkedModelSerializer):
